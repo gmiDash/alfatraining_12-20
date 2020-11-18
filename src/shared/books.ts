@@ -7,10 +7,7 @@ export const books: Book[] = [{
   published: new Date(2019, 4, 30),
   subtitle: 'Grundlagen, fortgeschrittene Themen und Best Practices - mit NativeScript und NgRx',
   rating: 5,
-  thumbnails: [{
-    url: 'https://ng-buch.de/buch1.jpg',
-    title: 'Buchcover'
-  }],
+  thumbnails: [],
   description: 'Die Autoren führen Sie mit einem anspruchsvollen Beispielprojekt durch die Welt von Angular...'
 }, {
   isbn: '9783864903274',
