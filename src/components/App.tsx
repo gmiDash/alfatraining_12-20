@@ -1,9 +1,12 @@
 import React, {ReactElement} from 'react';
+import PostList from './PostList'
+import ClassCounter from './ClassCounter'
 
 export default function App(): ReactElement {
   return (
-    <div className="ui active inverted dimmer">
-      <div className="ui text loader large">Lade BookShelf ...</div>
+    <div className="ui container">
+      <ClassCounter startValue={4} />
+      <PostList />
     </div>
   );
 }
