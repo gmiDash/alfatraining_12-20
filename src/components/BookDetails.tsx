@@ -4,26 +4,28 @@ import axios from 'axios';
 import Book from '../types/Book'
 import LoadingSpinner from './shared/LoadingSpinner'
 import {useBookApi} from '../shared/BookApi'
+import {useHistory, useParams} from 'react-router-dom';
 
-interface Props {
-  book: Book
-  showList: () => void
-}
-
-export default function BookDetails(props: Props): ReactElement {
+export default function BookDetails(): ReactElement {
+  const {isbn} = useParams<{isbn: string}>()
+  const history = useHistory()
   const book = useBookApi<Book>(
     'get',
-    `books/${props.book.isbn}`
+    `books/${isbn}`
   )[0]
 
-  if (!book) {return <LoadingSpinner name={`Buch ${props.book.isbn}`} />}
+  if (!book) {return <LoadingSpinner name={`Buch ${isbn}`} />}
+
+  const onGoToList = () => {
+    history.push('/books')
+  }
 
   const onDelete = () => {
     axios({
       method: 'delete',
-      url: `https://api3.angular-buch.com/books/${props.book.isbn}`
+      url: `https://api3.angular-buch.com/books/${isbn}`
     })
-      .then(props.showList)
+      .then(onGoToList)
   }
 
   const getRatings = (): number[] => {
@@ -71,7 +73,7 @@ export default function BookDetails(props: Props): ReactElement {
           )}
         </div>
       </div>
-      <button onClick={props.showList} className="ui button">Back</button>
+      <button onClick={onGoToList} className="ui button">Back</button>
       <button onClick={onDelete} className="ui red button">Delete</button>
     </>
   )
