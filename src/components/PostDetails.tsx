@@ -1,10 +1,10 @@
-import React, {ReactElement} from 'react'
+import React, { ReactElement } from 'react'
 import Post from '../types/Post'
 import PostListItem from './PostListItem'
 
 interface Props {
-    post: Post
-    onClickedPostItem: (post: Post) => void
+  post: Post
+  onClickedPostItem: (post: Post) => void
 }
 
 export default function PostDetails(props: Props): ReactElement {
