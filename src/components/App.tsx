@@ -6,6 +6,8 @@ export default function App(): ReactElement {
   return (
     <div className="ui container">
       <ClassCounter startValue={4} />
+      <ClassCounter startValue={8} />
+      <ClassCounter />
       <PostList />
     </div>
   );
