@@ -13,7 +13,7 @@ interface Props {
 export default function BookDetails(props: Props): ReactElement {
   const book = useBookApi<Book>(
     'get',
-    `https://api3.angular-buch.com/books/${props.book.isbn}`
+    `books/${props.book.isbn}`
   )[0]
 
   if (!book) {return <LoadingSpinner name={`Buch ${props.book.isbn}`} />}
@@ -54,7 +54,7 @@ export default function BookDetails(props: Props): ReactElement {
           </div>
           <div className="four wide column">
             <h4>Erschienen</h4>
-            <p>{new Date(book.published).toLocaleDateString()}</p>
+            <p>{book.published.toLocaleDateString()}</p>
           </div>
           <div className="four wide column">
             <h4>Rating</h4>
