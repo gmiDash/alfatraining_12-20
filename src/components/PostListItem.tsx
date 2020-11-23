@@ -1,14 +1,15 @@
-import React, {ReactElement} from 'react';
+import React, { ReactElement } from 'react';
 import Post from '../types/Post';
 
 interface Props {
   readonly post: Post
+  onClickedPostItem: (post: Post) => void
 }
 
 export default function PostListItem(props: Props): ReactElement {
   const post = props.post
   return (
-    <div className="card">
+    <div onClick={() => props.onClickedPostItem(post)} className="card">
       <div className="content">
         <div className="header">
           {post.title}
@@ -20,7 +21,7 @@ export default function PostListItem(props: Props): ReactElement {
       <div className="extra content">
         User Id: {post.userId}
         {' '}
-              Post Id: {post.id}
+        Post Id: {post.id}
       </div>
     </div>
   )

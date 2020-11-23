@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react'
+import React, { ReactElement } from 'react'
 
 interface Props {
   readonly startValue?: number;
@@ -10,26 +10,40 @@ interface State {
 
 export default class ClassCounter extends React.Component<Props, State> {
   private intervalId!: number
+  private defaultTitle: string
 
   constructor(props: Props) {
     super(props)
-    this.state = {counter: this.props.startValue || 0}
+    this.state = { counter: this.props.startValue || 0 }
+    this.defaultTitle = window.document.title
+  }
+
+  private incrementCounter = (): void => {
+    this.setState(currentState => ({ counter: currentState.counter + 1 }))
   }
 
   componentDidMount(): void {
-    this.intervalId = window.setInterval(() => {
-      this.setState(currentState => ({counter: currentState.counter + 1}))
-    }, 1000)
+    this.intervalId = window.setInterval(this.incrementCounter, 2000)
   }
 
   componentWillUnmount(): void {
     window.clearInterval(this.intervalId)
+    window.document.title = this.defaultTitle
+  }
+
+  componentDidUpdate(_prevProps: Props, prevState: State): void {
+    if (prevState.counter !== this.state.counter) {
+      window.document.title = `Counter: ${this.state.counter}`
+    }
   }
 
   render(): ReactElement {
     return (
       <>
         <p>Counter Value: {this.state.counter}</p>
+        <button className="ui button icon" onClick={this.incrementCounter}>
+          <i className="icon plus" />
+        </button>
       </>
     )
   }

@@ -1,12 +1,17 @@
-import React, {ReactElement} from 'react'
-import {posts} from '../shared/posts'
+import React, { ReactElement } from 'react'
+import { posts } from '../shared/posts'
+import Post from '../types/Post'
 import PostListItem from './PostListItem'
 
-export default function PostList(): ReactElement {
+interface Props {
+  onClickedPostItem: (post: Post) => void
+}
+
+export default function PostList(props: Props): ReactElement {
   return (
     <div className="ui cards">
       {
-        posts.map(post => <PostListItem post={post} key={post.id} />)
+        posts.map(post => <PostListItem post={post} key={post.id} onClickedPostItem={props.onClickedPostItem} />)
       }
     </div>
   )
