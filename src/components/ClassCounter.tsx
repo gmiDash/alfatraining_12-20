@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, {ReactElement} from 'react'
 
 interface Props {
   readonly startValue?: number;
@@ -14,12 +14,13 @@ export default class ClassCounter extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
-    this.state = { counter: this.props.startValue || 0 }
+    this.state = {counter: this.props.startValue || 0}
     this.defaultTitle = window.document.title
   }
 
   private incrementCounter = (): void => {
-    this.setState(currentState => ({ counter: currentState.counter + 1 }))
+    // this.setState({counter: this.state.counter + 1})
+    this.setState(currentState => ({counter: currentState.counter + 1}))
   }
 
   componentDidMount(): void {
@@ -39,12 +40,12 @@ export default class ClassCounter extends React.Component<Props, State> {
 
   render(): ReactElement {
     return (
-      <>
-        <p>Counter Value: {this.state.counter}</p>
+      <p>
+        Counter Value: {this.state.counter}
         <button className="ui button icon" onClick={this.incrementCounter}>
           <i className="icon plus" />
         </button>
-      </>
+      </p>
     )
   }
 }
