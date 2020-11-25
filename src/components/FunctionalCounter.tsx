@@ -1,4 +1,4 @@
-import React, {ReactElement, useState} from 'react';
+import React, {ReactElement, useState, useEffect} from 'react';
 
 interface Props {
   startValue?: number
@@ -10,6 +10,21 @@ export default function FunctionalCounter(props: Props): ReactElement {
   const incrementCounter = () => {
     setCounter(counter_ => counter_ + 1)
   }
+
+  useEffect(() => {
+    const intervalId = window.setInterval(incrementCounter, 1000)
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [])
+
+  useEffect(() => {
+    const defaultTitle = window.document.title
+    window.document.title = `Counter: ${counter}`
+    return () => {
+      window.document.title = defaultTitle
+    }
+  }, [counter])
 
   return (
     <p>

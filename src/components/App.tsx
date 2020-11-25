@@ -7,6 +7,7 @@ import PostDetails from './PostDetails';
 
 export default function App(): ReactElement {
 
+  const [showCounter, setShowCounter] = useState(true)
   const [post, setPost] = useState<Post>()
 
   const onClickedPostItem = (postParam: Post): void => {
@@ -15,8 +16,8 @@ export default function App(): ReactElement {
 
   return (
     <div className="ui container">
-      <FunctionalCounter startValue={4} />
-      <ClassCounter startValue={4} />
+      { showCounter && <FunctionalCounter startValue={4} />}
+      { /*< ClassCounter startValue={4} /> */}
       {
         post
           ? <PostDetails post={post} onClickedPostItem={onClickedPostItem} />
