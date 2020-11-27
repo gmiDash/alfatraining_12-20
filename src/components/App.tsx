@@ -4,6 +4,7 @@ import ClassCounter from './ClassCounter'
 import FunctionalCounter from './FunctionalCounter'
 import Post from '../types/Post';
 import PostDetails from './PostDetails';
+import Clock from './Clock';
 
 export default function App(): ReactElement {
 
@@ -16,6 +17,7 @@ export default function App(): ReactElement {
 
   return (
     <div className="ui container">
+      <Clock />
       { showCounter && <FunctionalCounter startValue={4} />}
       { /*< ClassCounter startValue={4} /> */}
       {
