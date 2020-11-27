@@ -1,30 +1,49 @@
 import React, {ReactElement, useState} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+
 import PostList from './PostList'
 import ClassCounter from './ClassCounter'
 import FunctionalCounter from './FunctionalCounter'
-import Post from '../types/Post';
 import PostDetails from './PostDetails';
 import Clock from './Clock';
+import Layout from './Layout';
 
 export default function App(): ReactElement {
 
   const [showCounter, setShowCounter] = useState(true)
-  const [post, setPost] = useState<Post>()
-
-  const onClickedPostItem = (postParam: Post): void => {
-    setPost(post ? undefined : postParam)
-  }
 
   return (
-    <div className="ui container">
-      <Clock />
-      { showCounter && <FunctionalCounter startValue={4} />}
-      { /*< ClassCounter startValue={4} /> */}
-      {
-        post
-          ? <PostDetails post={post} onClickedPostItem={onClickedPostItem} />
-          : <PostList onClickedPostItem={onClickedPostItem} />
-      }
-    </div>
+    <Router>
+      <Layout>
+        <Switch>
+          <Route path="/posts/:postId">
+            <PostDetails />
+          </Route>
+          <Route path="/posts">
+            <PostList />
+          </Route>
+          <Route path="/clock">
+            <Clock />
+          </Route>
+          <Route path="/counter/functional">
+            {showCounter && <FunctionalCounter startValue={4} />}
+          </Route>
+          <Route path="/counter/class">
+            <ClassCounter startValue={4} />
+          </Route>
+          <Route path="/home">
+            <p>Welcome on Home</p>
+          </Route>
+          <Route path="/">
+            <Redirect to="/home" />
+          </Route>
+        </Switch>
+      </Layout>
+    </Router>
   );
 }

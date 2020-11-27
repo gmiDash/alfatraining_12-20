@@ -1,16 +1,31 @@
-import React, { ReactElement } from 'react'
+import React, {ReactElement} from 'react'
+import {useParams, useHistory} from 'react-router-dom'
+
+import {usePostApi} from '../PostApi'
 import Post from '../types/Post'
 import PostListItem from './PostListItem'
 
-interface Props {
-  post: Post
-  onClickedPostItem: (post: Post) => void
-}
+export default function PostDetails(): ReactElement {
+  const {postId} = useParams<{postId: string}>()
+  const history = useHistory()
+  const post = usePostApi<Post>('get', `posts/${postId}`)
 
-export default function PostDetails(props: Props): ReactElement {
+  if (!post) {return <p>Lade</p>}
+  console.log('history', history)
+
+  const onGoToNext = () => {
+    if (window.confirm('Sure?')) {
+      history.push(`/posts/${+postId + 1}`)
+    }
+  }
+
   return (
-    <div className="ui cards">
-      <PostListItem post={props.post} onClickedPostItem={props.onClickedPostItem} />
-    </div>
+    <>
+      <div className="ui cards">
+        <PostListItem post={post} />
+      </div>
+      <button className="ui button" onClick={onGoToNext}>Go To Next</button>
+      <button className="ui button" onClick={history.goBack}>Go Back</button>
+    </>
   )
 }
