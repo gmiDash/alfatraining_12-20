@@ -12,6 +12,7 @@ import FunctionalCounter from './FunctionalCounter'
 import PostDetails from './PostDetails';
 import Clock from './Clock';
 import Layout from './Layout';
+import Form from './Form';
 
 export default function App(): ReactElement {
 
@@ -26,6 +27,9 @@ export default function App(): ReactElement {
           </Route>
           <Route path="/posts">
             <PostList />
+          </Route>
+          <Route path="/form">
+            <Form />
           </Route>
           <Route path="/clock">
             <Clock />

@@ -14,6 +14,7 @@ export default function Layout(props: Props): ReactElement {
         <NavLink to="/clock" className="item">Clock</NavLink>
         <NavLink to="/counter/functional" className="item">Functional Counter</NavLink>
         <NavLink to="/counter/class" className="item">Class Counter</NavLink>
+        <NavLink to="/form" className="item">Form</NavLink>
       </div>
 
       <div className="ui container">

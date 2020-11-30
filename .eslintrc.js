@@ -27,6 +27,7 @@ module.exports = {
     "@typescript-eslint"
   ],
   "rules": {
+    'no-debugger': 'warn',
     "no-unused-vars": ['warn'], // instead of default error
     'indent': ['warn', 2] // instead of default 4
   }
