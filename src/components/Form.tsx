@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FormEvent, ReactElement, useState} from 'react';
+import css from './Form.module.css'
 
 export default function Form(): ReactElement {
-
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [emails, setEmails] = useState<string[]>(['a', ''])
@@ -36,12 +36,12 @@ export default function Form(): ReactElement {
   }
 
   return (
-    <form className="ui form" onSubmit={onSubmit}>
+    <form className={`ui form ${css.form}`} onSubmit={onSubmit}>
       <label>Username</label>
-      <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input placeholder="Username" required value={username} onChange={(e) => setUsername(e.target.value)} />
 
       <label>Password</label>
-      <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input placeholder="Password" type="password" required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} />
 
       <label>Email&apos;s</label>
       <button onClick={onAddEmail} type="button" className="ui button tiny">+</button>
