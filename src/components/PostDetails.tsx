@@ -2,10 +2,17 @@ import React, {ReactElement} from 'react'
 import {useParams, useHistory} from 'react-router-dom'
 
 import {usePostApi} from '../PostApi'
+import {Store} from '../store'
 import Post from '../types/Post'
 import PostListItem from './PostListItem'
 
-export default function PostDetails(): ReactElement {
+interface Props {
+  onAddToFavorite: (post: Post) => void
+  onRemoveFromFavorite: (post: Post) => void
+  store: Store
+}
+
+export default function PostDetails(props: Props): ReactElement {
   const {postId} = useParams<{postId: string}>()
   const history = useHistory()
   const post = usePostApi<Post>('get', `posts/${postId}`)
@@ -22,7 +29,7 @@ export default function PostDetails(): ReactElement {
   return (
     <>
       <div className="ui cards">
-        <PostListItem post={post} />
+        <PostListItem post={post} onAddToFavorite={props.onAddToFavorite} onRemoveFromFavorite={props.onRemoveFromFavorite} store={props.store} />
       </div>
       <button className="ui button" onClick={onGoToNext}>Go To Next</button>
       <button className="ui button" onClick={history.goBack}>Go Back</button>
