@@ -5,13 +5,10 @@ import Book from '../types/Book'
 import LoadingSpinner from './shared/LoadingSpinner'
 import {useBookApi} from '../shared/BookApi'
 import {Link, useHistory, useParams} from 'react-router-dom';
-import {Dispatch} from '../Store'
+import {useStore} from '../Store';
 
-interface Props {
-  dispatch: Dispatch
-}
-
-export default function BookDetails(props: Props): ReactElement {
+export default function BookDetails(): ReactElement {
+  const {dispatch} = useStore()
   const {isbn} = useParams<{isbn: string}>()
   const history = useHistory()
   const book = useBookApi<Book>(
@@ -34,7 +31,7 @@ export default function BookDetails(props: Props): ReactElement {
   }
 
   const addToCart = () => {
-    props.dispatch({type: 'addToCart', book})
+    dispatch({type: 'addToCart', book})
   }
 
   const getRatings = (): number[] => {
