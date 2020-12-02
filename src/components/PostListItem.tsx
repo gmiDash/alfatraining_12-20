@@ -1,30 +1,28 @@
 import React, {ReactElement, SyntheticEvent} from 'react';
 import {Link} from 'react-router-dom'
-import {Store} from '../store';
 import Post from '../types/Post';
+import {useStore} from '../store'
 
 interface Props {
   readonly post: Post
-  readonly onAddToFavorite: (post: Post) => void
-  readonly onRemoveFromFavorite: (post: Post) => void
-  readonly store: Store
 }
 
 export default function PostListItem(props: Props): ReactElement {
   const post = props.post
+  const {store, dispatch} = useStore()
 
   const onAddToFavorite = (e: SyntheticEvent) => {
     e.preventDefault()
-    props.onAddToFavorite(post)
+    dispatch({type: 'AddToFavorites', post})
   }
 
   const onRemoveFromFavorite = (e: SyntheticEvent) => {
     e.preventDefault()
-    props.onRemoveFromFavorite(post)
+    dispatch({type: 'RemoveFromFavorites', post})
   }
 
   const countLikes = (): number => {
-    return props.store.favorites.filter(favoritPost => favoritPost.id === post.id).length
+    return store.favorites.filter(favoritPost => favoritPost.id === post.id).length
   }
 
   return (

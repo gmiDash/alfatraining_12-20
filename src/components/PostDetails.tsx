@@ -6,13 +6,7 @@ import {Store} from '../store'
 import Post from '../types/Post'
 import PostListItem from './PostListItem'
 
-interface Props {
-  onAddToFavorite: (post: Post) => void
-  onRemoveFromFavorite: (post: Post) => void
-  store: Store
-}
-
-export default function PostDetails(props: Props): ReactElement {
+export default function PostDetails(): ReactElement {
   const {postId} = useParams<{postId: string}>()
   const history = useHistory()
   const post = usePostApi<Post>('get', `posts/${postId}`)
@@ -29,7 +23,7 @@ export default function PostDetails(props: Props): ReactElement {
   return (
     <>
       <div className="ui cards">
-        <PostListItem post={post} onAddToFavorite={props.onAddToFavorite} onRemoveFromFavorite={props.onRemoveFromFavorite} store={props.store} />
+        <PostListItem post={post} />
       </div>
       <button className="ui button" onClick={onGoToNext}>Go To Next</button>
       <button className="ui button" onClick={history.goBack}>Go Back</button>
