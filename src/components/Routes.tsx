@@ -6,12 +6,17 @@ import BookDetails from './BookDetails'
 import Home from './Home'
 import BookCreate from './BookCreate';
 import Cart from './Cart';
+import BookEdit from './BookEdit';
 
 export default function Routes(): ReactElement {
   return (
     <Switch>
       <Route path='/books/create'>
         <BookCreate />
+      </Route>
+
+      <Route path='/books/edit/:isbn'>
+        <BookEdit />
       </Route>
 
       <Route path='/books/:isbn'>
